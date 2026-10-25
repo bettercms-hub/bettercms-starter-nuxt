@@ -3,10 +3,8 @@ name: Build
 # Build gate: builds the starter on every PR. This repo is a
 # template people fork, so a broken build here is shipped to every one of them.
 #
-# npm, not bun: it's what `npm run fetch-content` / the deploy Action assume. Install is
-# `npm ci` once a package-lock.json is committed, a fresh `npm install` until then (the
-# lockfile is added when @bettercms-ai/nuxt ^0.3.0 and @bettercms-ai/sdk ^1.40.0 resolve from
-# the registry).
+# npm, not bun: package-lock.json is the only lockfile committed here, and it's what
+# `npm run fetch-content` / the deploy Action assume.
 
 # Pull requests only, deliberately. This file is copied into every project generated from
 # this template, where `bcms-rebuild.yml` ALREADY builds (and deploys) on push — gating push
@@ -39,7 +37,7 @@ jobs:
       # With a lockfile: --frozen-lockfile equivalent, installs exactly what it pins and fails
       # if it has drifted from package.json. Without one: a fresh resolve of the ranges.
       - name: Install dependencies
-        run: if [ -f package-lock.json ]; then npm ci; else npm install --no-audit --no-fund; fi
+        run: npm ci
 
       # `bcms-content.json` is the deploy Action's build snapshot and is gitignored, so
       # CI never has one — and a static build resolves ALL content from it. This writes a
