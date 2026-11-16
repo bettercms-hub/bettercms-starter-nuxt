@@ -17,7 +17,7 @@
   "dependencies": {
     "@bettercms-ai/nuxt": "^0.3.0",
     "@bettercms-ai/sdk": "^1.40.0",
-    "nuxt": "^4.6.2",
+    "nuxt": "^4.6.4",
     "vue": "^3.5.44",
     "vue-router": "^5.4.0"
   },
